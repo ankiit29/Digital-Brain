@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "description": "brainly backend",
   "main": "index.js",
-  "scripts": {
-    "build": "tsc -b",
-    "start": "node dist/index.js",
-    "dev": "npm run build && npm run start",
-    "nodemon": "nodemon --watch 'src/**/*.ts' --exec ts-node src/index.ts"
-  },
+"scripts": {
+  "dev": "nodemon src/index.ts",
+  "build": "tsc",
+  "start": "node dist/index.js"
+},
   "author": "",
   "license": "ISC",
   "dependencies": {

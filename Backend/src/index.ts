@@ -14,10 +14,15 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: true,
+    origin: [
+      "http://localhost:5173",
+      "https://digitalbrain-self.vercel.app",   // 👈 Your real frontend domain
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
+
 
 app.get("/", (req, res) => {
   res.send("<h1>Server is in running mode...</h1>");

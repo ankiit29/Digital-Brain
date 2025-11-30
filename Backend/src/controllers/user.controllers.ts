@@ -102,6 +102,7 @@ export const signin = async (req: any, res: any) => {
       httpOnly: true, // only accessible by the server
       secure: true, // only sent over HTTPS
       expires: "1d", // 24 hours
+      sameSite: "none",  // 👈 required for cross-domain cookies
     });
 
     return res.status(200).json({

@@ -98,12 +98,20 @@ export const signin = async (req: any, res: any) => {
     });
 
     // Set cookie for authentication
-    res.cookie("token", token, user._id, {
-      httpOnly: true, // only accessible by the server
-      secure: true, // only sent over HTTPS
-      expires: "1d", // 24 hours
-      sameSite: "none",  // 👈 required for cross-domain cookies
+    // res.cookie("token", token, user._id, {
+    //   httpOnly: true, // only accessible by the server
+    //   secure: true, // only sent over HTTPS
+    //   expires: "1d", // 24 hours
+    //   sameSite: "none",  // 👈 required for cross-domain cookies
+    // });
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,                    // HTTPS only (Render uses HTTPS)
+      sameSite: "none",                // REQUIRED for Vercel <--> Render
+      maxAge: 24 * 60 * 60 * 1000,     // 1 day in ms
+      path: "/",
     });
+
 
     return res.status(200).json({
       success: true,

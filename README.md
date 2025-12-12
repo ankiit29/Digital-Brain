@@ -52,109 +52,121 @@ A full-stack personal knowledge management system that lets you store notes, lin
 
 ---
 
-## 📁 Project Structure
-Digital-Brain/
-│
-├── Backend/
-│ ├── src/
-│ │ ├── controllers/
-│ │ ├── middleware/
-│ │ ├── models/
-│ │ ├── routes/
-│ │ ├── schemas/
-│ │ └── utils/
-│ ├── package.json
-│ └── tsconfig.json
-│
-└── Frontend/
-├── src/
-│ ├── components/
-│ ├── pages/
-│ ├── hooks/
-│ └── utils/
-├── package.json
-└── vite.config.ts
+## 🚀 Getting Started
 
+Follow these instructions to set up and run the project locally.
+
+### Prerequisites
+
+* Node.js (LTS recommended)
+* npm or yarn
+* A MongoDB connection URL (local or cloud like MongoDB Atlas)
 
 ---
 
 ## ⚙️ Backend Setup
 
-```bash
-cd Backend
-npm install
-npm run dev
+The backend is built with **Node.js, Express, and TypeScript**.
 
-Create .env file in Backend:
-MONGO_URL=your_mongodb_url
-JWT_SECRET=your_secret_key
+1.  **Navigate to the Backend directory:**
+    ```bash
+    cd Backend
+    ```
 
+2.  **Install dependencies and run the server:**
+    ```bash
+    npm install
+    npm run dev
+    ```
 
-Backend runs at:
+3.  **Environment Configuration:**
+    Create a file named `.env` in the root of the `Backend/` directory:
 
-http://localhost:5000
+    ```env
+    MONGO_URL=your_mongodb_url_here
+    JWT_SECRET=a_strong_secret_key_for_jwt_signing
+    PORT=5000
+    ```
 
-🎨 Frontend Setup
-cd Frontend
-npm install
-npm run dev
+> The server will run at: **`http://localhost:5000`**
 
-Create .env file in Frontend:
-VITE_API_URL=http://localhost:5000
+## 🎨 Frontend Setup
 
+The frontend is built with **React and Vite**.
 
-Frontend runs at:
+1.  **Navigate to the Frontend directory:**
+    ```bash
+    cd ../Frontend
+    ```
 
-http://localhost:5173
+2.  **Install dependencies and run the client:**
+    ```bash
+    npm install
+    npm run dev
+    ```
 
-🧪 API Overview
-🔐 Auth APIs
-Method	Route	Description
-POST	/signup	Register new user
-POST	/signin	Login user & set JWT cookie
-POST	/signout	Logout user
-GET	/auth-check	Verify user authentication
-📝 Content APIs
-Method	Route	Description
-POST	/content/create	Create new content
-GET	/content	Get all user content
-PUT	/content/update	Update existing content
-DELETE	/content/delete	Delete content
-🔗 Sharing APIs
-Method	Route	Description
-POST	/share	Create/remove share link
-GET	/share/:hash	Get shared content
-GET	/share	Get all shared links
-🧠 How It Works (High-Level Flow)
+3.  **Environment Configuration:**
+    Create a file named `.env` in the root of the `Frontend/` directory:
 
-User signs in → JWT stored in HTTP-only cookie
+    ```env
+    VITE_API_URL=http://localhost:5000
+    ```
 
-User creates notes/content → tags created automatically
+> The client will run at: **`http://localhost:5173`**
 
-User enables sharing → unique hash generated
+---
 
-Anyone with the hash can view their public brain
+## 🧪 API Overview
 
-Turning sharing off removes the link
+### 🔐 Auth APIs (Routes under `/auth`)
 
-🛣️ Roadmap
+| Method | Route | Description |
+| :--- | :--- | :--- |
+| `POST` | `/signup` | Register a new user |
+| `POST` | `/signin` | Login user & set JWT cookie |
+| `POST` | `/signout` | Logout user (clears cookie) |
+| `GET` | `/auth-check` | Verify user authentication status |
 
- Search content by tags or keywords
+### 📝 Content APIs (Routes under `/content`)
 
- Pagination and filtering
+| Method | Route | Description |
+| :--- | :--- | :--- |
+| `POST` | `/content/create` | Create new content/note |
+| `GET` | `/content` | Get all content belonging to the user |
+| `PUT` | `/content/update` | Update existing content (Requires ID) |
+| `DELETE` | `/content/delete` | Delete content (Requires ID) |
 
- Rich text editor
+### 🔗 Sharing APIs (Routes under `/share`)
 
- Dark mode
+| Method | Route | Description |
+| :--- | :--- | :--- |
+| `POST` | `/share` | Create or remove a share link for specific content |
+| `GET` | `/share/:hash` | Get content using the unique share hash |
+| `GET` | `/share` | Get a list of all currently shared links by the user |
 
- Role-based access
+---
 
- Analytics for shared brain views
+## 🧠 How It Works (High-Level Flow)
 
-📄 License
+1.  **Authentication:** User signs in, and a **JSON Web Token (JWT)** is generated and securely stored in an **HTTP-only cookie**. This cookie is sent automatically with every subsequent API request.
+2.  **Content Creation:** User creates notes/content. The system processes the content and automatically generates relevant **tags** for better organization.
+3.  **Sharing:** When the user enables sharing for a piece of content, a **unique hash** is generated. Anyone with this hash can view the publicly shared content (their "public brain").
+4.  **Security:** Turning the sharing feature off immediately invalidates and removes the public link.
 
-MIT License
+## 🛣️ Roadmap
 
+The following features are planned for future development:
+
+* Search content by tags or keywords for quick retrieval.
+* Implement pagination and filtering on content and sharing lists.
+* Integrate a Rich Text Editor (e.g., Quill, TinyMCE) for enhanced content formatting.
+* Add a Dark Mode toggle for user preference.
+* Implement Role-based Access Control (RBAC) for team features.
+* Develop Analytics for monitoring shared brain view counts and traffic.
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
 👤 Author
 
 Ankit Yadav
